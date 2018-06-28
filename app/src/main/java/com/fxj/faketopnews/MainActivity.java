@@ -3,6 +3,8 @@ package com.fxj.faketopnews;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.socks.library.KLog;
+
 public class MainActivity extends Activity {
 
     @Override
