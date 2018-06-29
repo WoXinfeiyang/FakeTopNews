@@ -5,9 +5,7 @@ import android.app.Application;
 import com.fxj.faketopnews.BuildConfig;
 import com.socks.library.KLog;
 
-/**
- * Created by fuxianjin-hj on 2018/6/28.
- */
+
 
 public class BaseApplication extends Application {
 
