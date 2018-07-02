@@ -1,10 +1,11 @@
-package com.fxj.faketopnews;
+package com.fxj.faketopnews.main;
 
 import android.app.Activity;
 import android.os.Bundle;
 
 import com.fxj.faketopnews.Base.BaseActivity;
 import com.fxj.faketopnews.Base.BasePresenter;
+import com.fxj.faketopnews.R;
 
 public class MainActivity extends BaseActivity {
 

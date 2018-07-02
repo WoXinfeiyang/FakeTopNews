@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">FakeTopNews</string>
-
+    <string name="skip_btn_text">跳过</string>
 </resources>
