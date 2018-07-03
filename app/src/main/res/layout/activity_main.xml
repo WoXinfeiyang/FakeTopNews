@@ -18,7 +18,7 @@
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp"
-        android:background="#EBEBEB"
+        android:background="@color/bottom_bar_container_bg"
         >
         <com.fxj.faketopnews.views.BottomBar.BottomBarItem
             android:layout_width="0dp"

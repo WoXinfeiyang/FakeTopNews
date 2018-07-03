@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 public class BottomBarContainer extends LinearLayout {
-    private final String tag=BottomBarContainer.class.getSimpleName();
+    private final String tag=BottomBarContainer.class.getSimpleName()+"fxj";
 
     private List<BottomBarItem> mItemViews;
     private int mCurrentPosition;
@@ -36,6 +36,12 @@ public class BottomBarContainer extends LinearLayout {
 
     }
 
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        init();
+    }
+
     public void init(){
         childenCount = getChildCount();
         if(childenCount<1){
@@ -50,6 +56,7 @@ public class BottomBarContainer extends LinearLayout {
             item.setOnClickListener(new BottomBarContainerClickListener(i));/*给每个子View绑定View.OnClickListener监听器*/
             mItemViews.add(item);
         }
+        KLog.i(tag,"BottomBarContainer容器内当前共有"+childenCount+"个BottomBarItem子View");
         resetSelectStatus();
         ((BottomBarItem)mItemViews.get(mCurrentPosition)).setSelectedStatus(true);
     }
