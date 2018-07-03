@@ -2,6 +2,7 @@ package com.fxj.faketopnews.views.BottomBar;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,6 +31,10 @@ public class BottomBarItem extends RelativeLayout {
     private int mItemTextColorSelected;
 
     private float mItemMarginTop;
+    /**是否开启触摸效果*/
+    private boolean mIsOpenTouchBg;
+    /**触摸效果Drawable*/
+    private Drawable mTouchDrawable;
 
     boolean isSelected;
 
@@ -65,6 +70,9 @@ public class BottomBarItem extends RelativeLayout {
         this.mItemTextColorNormal=ta.getColor(R.styleable.BottomBarItem_item_text_color_normal,mItemTextColorNormal);
         this.mItemTextColorSelected=ta.getColor(R.styleable.BottomBarItem_item_text_color_selected,mItemTextColorSelected);
         this.mItemMarginTop=ta.getDimension(R.styleable.BottomBarItem_item_margin_top,0);
+
+        this.mIsOpenTouchBg=ta.getBoolean(R.styleable.BottomBarItem_open_touch_bg,false);
+        this.mTouchDrawable=ta.getDrawable(R.styleable.BottomBarItem_touch_drawable);
     }
 
     private void initView(Context context) {
@@ -83,6 +91,10 @@ public class BottomBarItem extends RelativeLayout {
             this.tvText.setLayoutParams(tvTextLayoutParams);
         }
 
+        if(mIsOpenTouchBg){
+            rootView.setBackground(mTouchDrawable);
+        }
+
         addView(rootView);
     }
 
@@ -92,6 +104,9 @@ public class BottomBarItem extends RelativeLayout {
         }
         if(this.mItemTextColorSelected==-1){
             throw  new IllegalArgumentException("还没有设置选择状态下的图标,请设置mItemTextColorSelected");
+        }
+        if(this.mIsOpenTouchBg&&mTouchDrawable==null){
+            throw new IllegalArgumentException("开启了触摸效果却没有设置触摸效果Drawable对象");
         }
     }
 

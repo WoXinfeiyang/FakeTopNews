@@ -9,5 +9,11 @@
         <attr name="item_text_color_selected" format="color"/>
         <!-- 图标和文字标题之间的距离 -->
         <attr name="item_margin_top" format="dimension"/>
+
+        <!--是否开启触摸背景效果-->
+        <attr name="open_touch_bg" format="boolean"/>
+        <!--设置触摸背景-->
+        <attr name="touch_drawable" format="reference"/>
+        
     </declare-styleable>
 </resources>

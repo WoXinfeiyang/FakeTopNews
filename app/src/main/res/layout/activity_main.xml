@@ -30,6 +30,8 @@
             app:item_text_size="5dp"
             app:item_text_color_normal="#515051"
             app:item_text_color_selected="#D33D3C"
+            app:open_touch_bg="true"
+            app:touch_drawable="@drawable/selector_tab_bottom_item_bg"
             />
         <com.fxj.faketopnews.views.BottomBar.BottomBarItem
             android:layout_width="0dp"
@@ -41,6 +43,8 @@
             app:item_text_size="5dp"
             app:item_text_color_normal="#515051"
             app:item_text_color_selected="#D33D3C"
+            app:open_touch_bg="true"
+            app:touch_drawable="@drawable/selector_tab_bottom_item_bg"
             />
         <com.fxj.faketopnews.views.BottomBar.BottomBarItem
             android:layout_width="0dp"
@@ -52,6 +56,8 @@
             app:item_text_size="5dp"
             app:item_text_color_normal="#515051"
             app:item_text_color_selected="#D33D3C"
+            app:open_touch_bg="true"
+            app:touch_drawable="@drawable/selector_tab_bottom_item_bg"
             />
 
         <com.fxj.faketopnews.views.BottomBar.BottomBarItem
@@ -64,6 +70,8 @@
             app:item_text_size="5dp"
             app:item_text_color_normal="#515051"
             app:item_text_color_selected="#D33D3C"
+            app:open_touch_bg="true"
+            app:touch_drawable="@drawable/selector_tab_bottom_item_bg"
             />
 
     </com.fxj.faketopnews.views.BottomBar.BottomBarContainer>
