@@ -1,34 +1,31 @@
 package com.fxj.faketopnews.Base;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 
 import org.greenrobot.eventbus.EventBus;
 
 /**
- * Created by fuxianjin-hj on 2018/6/29.
+ * Fragment抽象基类
  */
-
-public abstract class BaseActivity<P extends BasePresenter> extends FragmentActivity {
-
-    protected P mPresenter;
+public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
+    private P mPresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter=createPresenter();
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         if(mPresenter!=null){
-            mPresenter.detachView();/*Presenter释放对Activity的引用,避免产生内存泄露*/
+            mPresenter.detachView();
         }
     }
 
-    /**创建Presenter,抽象方法,供子类实现*/
     protected abstract P createPresenter();
 
     public boolean isEventBusRegistered(Object subscriber){
