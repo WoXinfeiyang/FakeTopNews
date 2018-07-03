@@ -9,16 +9,19 @@ import com.socks.library.KLog;
 
 
 public class BaseApplication extends Application {
-
+    private static final String tag=BaseApplication.class.getSimpleName()+"_fxj";
     private static Context appContext;
+
     @Override
     public void onCreate() {
         super.onCreate();
         KLog.init(BuildConfig.DEBUG);
-        this.appContext=getApplicationContext();
+        appContext=getApplicationContext();
+        KLog.i(tag,"**BaseApplication.onCreate**appContext="+appContext);
     }
 
     public static Context getAppContext(){
-     return appContext;
+        KLog.i(tag,"**BaseApplication#onCreate**getAppContext="+appContext);
+        return appContext;
     }
 }

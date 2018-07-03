@@ -1,6 +1,7 @@
 package com.fxj.faketopnews.views.BottomBar;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -36,13 +37,18 @@ public class BottomBarContainer extends LinearLayout {
 
     }
 
+
+    /*该方法将在xml布局文件中所有的子View都加载到ViewGroup后回调改方法*/
     @Override
     protected void onFinishInflate() {
+        KLog.i(tag,"onFinishInflate");
         super.onFinishInflate();
         init();
     }
 
-    public void init(){
+
+
+    private void init(){
         childenCount = getChildCount();
         if(childenCount<1){
             throw new IllegalArgumentException("BottomBarContainer容器内目前有"+childenCount+"个BottomBarItem,请至少添加一个BottomBarItem");

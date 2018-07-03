@@ -17,7 +17,7 @@ import com.socks.library.KLog;
  */
 
 public class BottomBarItem extends RelativeLayout {
-    private final String tag=BottomBarItem.class.getSimpleName();
+    private final String tag=BottomBarItem.class.getSimpleName()+"_fxj";
 
     private ImageView ivIcon;
     private TextView tvText;
@@ -50,7 +50,7 @@ public class BottomBarItem extends RelativeLayout {
         this.mIconNormalResId=ta.getResourceId(R.styleable.BottomBarItem_icon_normal,-1);
         this.mIconSelectedResId=ta.getResourceId(R.styleable.BottomBarItem_icon_selected,-1);
         this.mItemText=ta.getString(R.styleable.BottomBarItem_item_text);
-        this.mItemTextSize= ta.getDimension(R.styleable.BottomBarItem_item_text_size, 30/*UiUtils.dp2px(30)*/);
+        this.mItemTextSize= ta.getDimension(R.styleable.BottomBarItem_item_text_size,UiUtils.dp2px(30));
         this.mItemTextColorNormal=ta.getColor(R.styleable.BottomBarItem_item_text_color_normal,mItemTextColorNormal);
         this.mItemTextColorSelected=ta.getColor(R.styleable.BottomBarItem_item_text_color_selected,mItemTextColorSelected);
         ta.recycle();
