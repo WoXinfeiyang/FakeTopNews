@@ -14,7 +14,7 @@ import com.fxj.faketopnews.main.MainActivity;
 import com.socks.library.KLog;
 
 public class SplashActivity extends BaseActivity implements View.OnClickListener{
-    private final String tag=SplashActivity.this.getClass().getSimpleName();
+    private final String tag=SplashActivity.class.getSimpleName();
     private TextView skipBtn;
 
 

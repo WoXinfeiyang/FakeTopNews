@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,9 +10,62 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+         />
 
-</android.support.constraint.ConstraintLayout>
+    <com.fxj.faketopnews.views.BottomBar.BottomBarContainer
+        android:id="@+id/bottom_bar_container"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:background="#EBEBEB"
+        >
+        <com.fxj.faketopnews.views.BottomBar.BottomBarItem
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:icon_normal="@drawable/tab_home_normal"
+            app:icon_selected="@drawable/tab_home_selected"
+            app:item_text="首页"
+            app:item_text_size="5dp"
+            app:item_text_color_normal="#515051"
+            app:item_text_color_selected="#D33D3C"
+            />
+        <com.fxj.faketopnews.views.BottomBar.BottomBarItem
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:icon_normal="@drawable/tab_video_normal"
+            app:icon_selected="@drawable/tab_video_selected"
+            app:item_text="视频"
+            app:item_text_size="5dp"
+            app:item_text_color_normal="#515051"
+            app:item_text_color_selected="#D33D3C"
+            />
+        <com.fxj.faketopnews.views.BottomBar.BottomBarItem
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:icon_normal="@drawable/tab_micro_normal"
+            app:icon_selected="@drawable/tab_micro_selected"
+            app:item_text="微头条"
+            app:item_text_size="5dp"
+            app:item_text_color_normal="#515051"
+            app:item_text_color_selected="#D33D3C"
+            />
+
+        <com.fxj.faketopnews.views.BottomBar.BottomBarItem
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:icon_normal="@drawable/tab_me_normal"
+            app:icon_selected="@drawable/tab_me_selected"
+            app:item_text="我的"
+            app:item_text_size="5dp"
+            app:item_text_color_normal="#515051"
+            app:item_text_color_selected="#D33D3C"
+            />
+
+    </com.fxj.faketopnews.views.BottomBar.BottomBarContainer>
+
+</RelativeLayout>
