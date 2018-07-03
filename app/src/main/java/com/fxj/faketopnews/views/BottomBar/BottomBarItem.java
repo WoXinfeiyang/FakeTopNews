@@ -29,6 +29,8 @@ public class BottomBarItem extends RelativeLayout {
     private int mItemTextColorNormal;
     private int mItemTextColorSelected;
 
+    private float mItemMarginTop;
+
     boolean isSelected;
 
     public BottomBarItem(Context context) {
@@ -47,16 +49,22 @@ public class BottomBarItem extends RelativeLayout {
         this.mItemTextColorSelected =0xFF46C01B;
 
         TypedArray ta=context.obtainStyledAttributes(attrs,R.styleable.BottomBarItem);
+        initAttribute(ta);
+        ta.recycle();
+        checkValue();
+        KLog.i(tag,toString());
+        initView(context);
+    }
+
+    /**初始化属性*/
+    private void initAttribute(TypedArray ta){
         this.mIconNormalResId=ta.getResourceId(R.styleable.BottomBarItem_icon_normal,-1);
         this.mIconSelectedResId=ta.getResourceId(R.styleable.BottomBarItem_icon_selected,-1);
         this.mItemText=ta.getString(R.styleable.BottomBarItem_item_text);
         this.mItemTextSize= ta.getDimension(R.styleable.BottomBarItem_item_text_size,UiUtils.dp2px(30));
         this.mItemTextColorNormal=ta.getColor(R.styleable.BottomBarItem_item_text_color_normal,mItemTextColorNormal);
         this.mItemTextColorSelected=ta.getColor(R.styleable.BottomBarItem_item_text_color_selected,mItemTextColorSelected);
-        ta.recycle();
-        checkValue();
-        KLog.i(tag,toString());
-        initView(context);
+        this.mItemMarginTop=ta.getDimension(R.styleable.BottomBarItem_item_margin_top,0);
     }
 
     private void initView(Context context) {
@@ -68,6 +76,13 @@ public class BottomBarItem extends RelativeLayout {
         this.tvText.setText(mItemText);
         this.tvText.setTextSize(this.mItemTextSize);
         this.tvText.setTextColor(this.mItemTextColorNormal);
+
+        LayoutParams tvTextLayoutParams = (LayoutParams) this.tvText.getLayoutParams();
+        if(tvTextLayoutParams!=null){
+            tvTextLayoutParams.topMargin= (int) mItemMarginTop;
+            this.tvText.setLayoutParams(tvTextLayoutParams);
+        }
+
         addView(rootView);
     }
 

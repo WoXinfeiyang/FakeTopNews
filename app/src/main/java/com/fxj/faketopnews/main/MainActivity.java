@@ -11,7 +11,7 @@ import com.fxj.faketopnews.views.BottomBar.BottomBarItem;
 import com.socks.library.KLog;
 
 public class MainActivity extends BaseActivity {
-    private final String tag=MainActivity.class.getSimpleName()+"fxj";
+    private final String tag=MainActivity.class.getSimpleName()+"_fxj";
     private BottomBarContainer mBottomBarContainer;
 
     @Override
