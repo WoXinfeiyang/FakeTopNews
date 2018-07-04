@@ -81,6 +81,15 @@ public class BottomBarContainer extends LinearLayout {
         }
     }
 
+    public void setSelectedItem(int position){
+      if(mItemViews==null||mItemViews.size()<1||position<0||position>=mItemViews.size()){
+          return;
+      }
+      resetSelectStatus();
+      this.mCurrentPosition=position;
+      mItemViews.get(position).setSelectedStatus(true);
+    }
+
     public interface OnItemClickListener{
         /**
          * BootomBarContainer容器中点击事件回调方法

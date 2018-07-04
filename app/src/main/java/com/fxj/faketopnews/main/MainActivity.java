@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
+
 import com.fxj.faketopnews.Base.BaseActivity;
 import com.fxj.faketopnews.Base.BaseFragment;
 import com.fxj.faketopnews.Base.BasePresenter;
@@ -32,11 +34,28 @@ public class MainActivity extends BaseActivity {
         mFragList= initData();
         MainAdapter adapter=new MainAdapter(getSupportFragmentManager(),mFragList);
         mViewPager.setAdapter(adapter);
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mBottomBarContainer.setSelectedItem(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         mBottomBarContainer.setOnItemClickListener(new BottomBarContainer.OnItemClickListener(){
 
             @Override
             public void onItemClick(BottomBarItem itemView, int position) {
                 KLog.i(tag,"底部按钮被点击了,position="+position);
+                mViewPager.setCurrentItem(position);
             }
         });
     }
