@@ -59,6 +59,7 @@ public class MicroFragment extends BaseFragment {
     /*每次创建、绘制Fragment的View组件时回调该方法,Fragment将显示该方法所返回的View*/
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
+        super.onCreateView(inflater,container,savedInstanceState);
         KLog.i(tag,"MicroFragment.onCreateView");
         RelativeLayout rootView=new RelativeLayout(mContext);
         RelativeLayout.LayoutParams rlParams=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.fxj.faketopnews.Base.BaseFragment;
 import com.fxj.faketopnews.Base.BasePresenter;
+import com.fxj.faketopnews.R;
 import com.socks.library.KLog;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
@@ -27,6 +28,7 @@ public class HomeFragment extends BaseFragment {
 
     private final String tag=HomeFragment.class.getSimpleName()+"_fxj";
     private Context mContext;
+    private View rootView;
 
     public static HomeFragment newInstance() {
         
@@ -60,20 +62,11 @@ public class HomeFragment extends BaseFragment {
     /*每次创建、绘制Fragment的View组件时回调该方法,Fragment将显示该方法所返回的View*/
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
+        super.onCreateView(inflater,container,savedInstanceState);
         KLog.i(tag,"HomeFragment.onCreateView");
-        RelativeLayout rootView=new RelativeLayout(mContext);
-        RelativeLayout.LayoutParams rlParams=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
-        rootView.setLayoutParams(rlParams);
-
-        TextView tv=new TextView(mContext);
-        tv.setText("首页");
-        tv.setTextColor(Color.BLACK);
-        tv.setTextSize(COMPLEX_UNIT_DIP,20);
-        rootView.addView(tv);
-        RelativeLayout.LayoutParams tvLayoutParams= (RelativeLayout.LayoutParams) tv.getLayoutParams();
-        tvLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
-        tv.setLayoutParams(tvLayoutParams);
-
+        if(rootView==null){
+            rootView = inflater.inflate(R.layout.fragment_home,container,false);
+        }
         return rootView;
     }
 

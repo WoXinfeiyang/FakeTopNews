@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">FakeTopNews</string>
     <string name="skip_btn_text">跳过</string>
+    <string name="et_search_input_hint">搜你想搜的</string>
 </resources>
