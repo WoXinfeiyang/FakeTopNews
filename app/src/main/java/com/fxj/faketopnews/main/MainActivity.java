@@ -34,6 +34,7 @@ public class MainActivity extends BaseActivity {
         mFragList= initData();
         MainAdapter adapter=new MainAdapter(getSupportFragmentManager(),mFragList);
         mViewPager.setAdapter(adapter);
+        mViewPager.setOffscreenPageLimit(mFragList.size());/*给ViewPager设置预加载页面数量*/
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
