@@ -22,9 +22,9 @@ public class SplashActivity extends BaseActivity implements View.OnClickListener
     private static final int MSG_AUTO_SKIP =1;
 
     /**延迟显示跳转按钮的时间*/
-    private long delayShowSkipBtnTime=2000;
+    private long delayShowSkipBtnTime=500;
     /**SplashActivity延迟自动跳转时间*/
-    private long delayAutoSkipTime =delayShowSkipBtnTime+2000;
+    private long delayAutoSkipTime =delayShowSkipBtnTime+0;
 
     Handler handler=new Handler(){
         @Override
