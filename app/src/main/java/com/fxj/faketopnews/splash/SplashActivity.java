@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.fxj.faketopnews.Base.BaseActivity;
-import com.fxj.faketopnews.Base.BasePresenter;
+import com.fxj.faketopnews.presenter.BasePresenter;
 import com.fxj.faketopnews.R;
 import com.fxj.faketopnews.main.MainActivity;
 import com.socks.library.KLog;

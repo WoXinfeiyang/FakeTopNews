@@ -8,7 +8,7 @@ import android.support.v4.view.ViewPager;
 
 import com.fxj.faketopnews.Base.BaseActivity;
 import com.fxj.faketopnews.Base.BaseFragment;
-import com.fxj.faketopnews.Base.BasePresenter;
+import com.fxj.faketopnews.presenter.BasePresenter;
 import com.fxj.faketopnews.R;
 import com.fxj.faketopnews.views.BottomBar.BottomBarContainer;
 import com.fxj.faketopnews.views.BottomBar.BottomBarItem;

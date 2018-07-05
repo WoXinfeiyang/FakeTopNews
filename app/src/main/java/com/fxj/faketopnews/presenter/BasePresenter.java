@@ -1,4 +1,4 @@
-package com.fxj.faketopnews.Base;
+package com.fxj.faketopnews.presenter;
 
 
 import io.reactivex.Observable;
@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers;
  * */
 public abstract class BasePresenter<V> {
     /**View*/
-    private V mView;
+    protected V mView;
 
     private ArrayCompositeSubscription mCompositionSubscription;
 

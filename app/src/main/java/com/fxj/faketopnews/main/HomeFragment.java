@@ -1,42 +1,33 @@
 package com.fxj.faketopnews.main;
 
-import android.app.ActionBar;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fxj.faketopnews.Base.BaseFragment;
-import com.fxj.faketopnews.Base.BasePresenter;
 import com.fxj.faketopnews.R;
 import com.fxj.faketopnews.model.HttpConstant;
 import com.fxj.faketopnews.model.bean.CategoryBean;
+import com.fxj.faketopnews.presenter.NewsListPresenter;
+import com.fxj.faketopnews.view_inface.INewsList;
 import com.socks.library.KLog;
 
 import java.util.ArrayList;
 
-import cn.finalteam.okhttpfinal.BaseHttpRequestCallback;
 import cn.finalteam.okhttpfinal.HttpCycleContext;
 import cn.finalteam.okhttpfinal.HttpRequest;
 import cn.finalteam.okhttpfinal.JsonHttpRequestCallback;
 import cn.finalteam.okhttpfinal.RequestParams;
 
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-
 /**
  * Created by fuxianjin-hj on 2018/7/3.
  */
 
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment<NewsListPresenter> implements INewsList{
 
     private final String tag=HomeFragment.class.getSimpleName()+"_fxj";
     private Context mContext;
@@ -54,8 +45,8 @@ public class HomeFragment extends BaseFragment {
     }
     
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected NewsListPresenter createPresenter() {
+        return new NewsListPresenter(this);
     }
 
     /*当Fragment被添加到Activity时回调该方法,该方法只被回调一次*/
@@ -105,8 +96,16 @@ public class HomeFragment extends BaseFragment {
                 getNewsList(mCategoryList.get(i).mCategoryCode,System.currentTimeMillis()/1000-10,System.currentTimeMillis()/1000);
             }
         });
+
+        rootView.findViewById(R.id.tv_home01).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int i=0;
+                mPresenter.getNewsList(mCategoryList.get(i).mCategoryCode);
+            }
+        });
     }
-    long mLastTime;
+
     private void getNewsList(String categoryCode,long lastTime,long currentTime){
         RequestParams requestParams=new RequestParams(new HttpCycleContext(){
 
@@ -181,5 +180,16 @@ public class HomeFragment extends BaseFragment {
     public void onDetach() {
         super.onDetach();
         KLog.i(tag,"HomeFragment.onDetach");
+    }
+
+
+    @Override
+    public void onGetNewsListSuccess(JSONObject jsonObject) {
+        KLog.i(tag,jsonObject.toJSONString());
+    }
+
+    @Override
+    public void onGetNewsListFailed(String errorMsg) {
+        KLog.i(tag,errorMsg);
     }
 }

@@ -1,8 +1,9 @@
 package com.fxj.faketopnews.Base;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+
+import com.fxj.faketopnews.presenter.BasePresenter;
 
 import org.greenrobot.eventbus.EventBus;
 
