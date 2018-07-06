@@ -2,10 +2,12 @@ package com.fxj.faketopnews.presenter;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fxj.faketopnews.model.HttpConstant;
+import com.fxj.faketopnews.model.bean.NewsListBean;
 import com.fxj.faketopnews.utils.PreferenceUtils;
 import com.fxj.faketopnews.view_inface.INewsList;
 import com.socks.library.KLog;
 
+import cn.finalteam.okhttpfinal.BaseHttpRequestCallback;
 import cn.finalteam.okhttpfinal.HttpCycleContext;
 import cn.finalteam.okhttpfinal.HttpRequest;
 import cn.finalteam.okhttpfinal.JsonHttpRequestCallback;
@@ -59,15 +61,15 @@ public class NewsListPresenter extends BasePresenter<INewsList> {
         params.addFormDataPart("min_behot_time", mRequestNewsListLastTime);
         params.addFormDataPart("last_refresh_sub_entrance",System.currentTimeMillis());
 
-        addSubscription(Observable.create(new ObservableOnSubscribe<JSONObject>() {
+        addSubscription(Observable.create(new ObservableOnSubscribe<NewsListBean>() {
             @Override
-            public void subscribe(final ObservableEmitter<JSONObject> emitter) throws Exception {
-                HttpRequest.post(HttpConstant.GET_ARTICLE_LIST, params, new JsonHttpRequestCallback() {
+            public void subscribe(final ObservableEmitter<NewsListBean> emitter) throws Exception {
+                HttpRequest.post(HttpConstant.GET_ARTICLE_LIST, params, new BaseHttpRequestCallback<NewsListBean>() {
                     @Override
-                    protected void onSuccess(JSONObject jsonObject) {
-                        super.onSuccess(jsonObject);
-                        KLog.i(tag, jsonObject.toJSONString());
-                        emitter.onNext(jsonObject);
+                    protected void onSuccess(NewsListBean data) {
+                        super.onSuccess(data);
+                        KLog.i(tag, data.toString());
+                        emitter.onNext(data);
                     }
 
                     @Override
@@ -78,17 +80,17 @@ public class NewsListPresenter extends BasePresenter<INewsList> {
                     }
                 });
             }
-        }), new Observer<JSONObject>() {
+        }), new Observer<NewsListBean>() {
             @Override
             public void onSubscribe(Disposable d) {
                 getNewsListDisposable=d;
             }
 
             @Override
-            public void onNext(JSONObject jsonObject) {
-                KLog.i(tag,jsonObject.toJSONString());
+            public void onNext(NewsListBean object) {
+                KLog.i(tag,object.toString());
                 PreferenceUtils.setLong(KEY_REQUEST_NEWS_LIST_LAST_TIME,System.currentTimeMillis()/1000);
-                mView.onGetNewsListSuccess(jsonObject);
+                mView.onGetNewsListSuccess(object);
             }
 
             @Override
