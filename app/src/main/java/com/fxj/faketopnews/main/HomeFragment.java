@@ -3,11 +3,17 @@ package com.fxj.faketopnews.main;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.astuetz.PagerSlidingTabStrip;
 import com.fxj.faketopnews.Base.BaseFragment;
 import com.fxj.faketopnews.R;
 import com.fxj.faketopnews.model.HttpConstant;
@@ -18,6 +24,7 @@ import com.fxj.faketopnews.view_inface.INewsList;
 import com.socks.library.KLog;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cn.finalteam.okhttpfinal.HttpCycleContext;
 import cn.finalteam.okhttpfinal.HttpRequest;
@@ -32,9 +39,18 @@ public class HomeFragment extends BaseFragment<NewsListPresenter> implements INe
 
     private final String tag=HomeFragment.class.getSimpleName()+"_fxj";
     private Context mContext;
-    private View rootView;
 
-    private ArrayList<CategoryBean> mCategoryList=new ArrayList<CategoryBean>();
+    private View rootView;
+    private PagerSlidingTabStrip mTabStrip;
+    private ImageView mAddOperation;
+    private ViewPager mViewPager;
+
+    private List<CategoryBean> mSelectedCategoryList =new ArrayList<CategoryBean>();
+    private List<String> mSelectedCategoryNameList=new ArrayList<String>();
+
+    private List<NewsListFragment> mNewsListFragments=new ArrayList<NewsListFragment>();
+    private HomeAdapter adapter;
+
 
     public static HomeFragment newInstance() {
         
@@ -68,10 +84,12 @@ public class HomeFragment extends BaseFragment<NewsListPresenter> implements INe
         String[]categoryCode=getResources().getStringArray(R.array.category_code);
         if(categoryName!=null&&categoryCode!=null&&categoryName.length==categoryCode.length){
             for(int i=0;i<categoryName.length;i++){
-                mCategoryList.add(new CategoryBean(categoryName[i],categoryCode[i]));
+                mSelectedCategoryNameList.add(categoryName[i]);
+                mSelectedCategoryList.add(new CategoryBean(categoryName[i],categoryCode[i]));
             }
-            KLog.i(tag,"mCategoryList="+mCategoryList.toString());
+            KLog.i(tag,"mSelectedCategoryList="+ mSelectedCategoryList.toString());
         }
+
     }
 
     /*每次创建、绘制Fragment的View组件时回调该方法,Fragment将显示该方法所返回的View*/
@@ -89,22 +107,32 @@ public class HomeFragment extends BaseFragment<NewsListPresenter> implements INe
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         KLog.i(tag,"HomeFragment.onViewCreated");
-        rootView.findViewById(R.id.tv_home).setOnClickListener(new View.OnClickListener() {
+
+        mAddOperation = rootView.findViewById(R.id.iv__add_operation);
+        mAddOperation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                KLog.i(tag,"首页按钮被点击了!");
                 int i=0;
-                getNewsList(mCategoryList.get(i).mCategoryCode,System.currentTimeMillis()/1000-10,System.currentTimeMillis()/1000);
+                mPresenter.getNewsList(mSelectedCategoryList.get(i).mCategoryCode);
             }
         });
 
-        rootView.findViewById(R.id.tv_home01).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int i=0;
-                mPresenter.getNewsList(mCategoryList.get(i).mCategoryCode);
-            }
-        });
+        this.mTabStrip=rootView.findViewById(R.id.tab_strip);
+        this.mViewPager=rootView.findViewById(R.id.home_view_pager);
+
+        mNewsListFragments=initNewsListFragment();
+
+        adapter = new HomeAdapter(getChildFragmentManager(),mNewsListFragments,mSelectedCategoryNameList);
+        this.mViewPager.setAdapter(adapter);
+        this.mTabStrip.setViewPager(this.mViewPager);
+    }
+
+    private List<NewsListFragment> initNewsListFragment() {
+        List<NewsListFragment> list=new ArrayList<NewsListFragment>();
+        for(CategoryBean mCategory:mSelectedCategoryList){
+            list.add(NewsListFragment.newInstance(mCategory.mCategoryName,mCategory.mCategoryCode));
+        }
+        return  list;
     }
 
     private void getNewsList(String categoryCode,long lastTime,long currentTime){
@@ -192,5 +220,33 @@ public class HomeFragment extends BaseFragment<NewsListPresenter> implements INe
     @Override
     public void onGetNewsListFailed(String errorMsg) {
         KLog.i(tag,errorMsg);
+    }
+
+
+    class HomeAdapter extends FragmentStatePagerAdapter{
+        List<NewsListFragment> mFragList;
+        List<String> mCategoryNameList;
+
+        public HomeAdapter(FragmentManager fm, List<NewsListFragment> mFragList, List<String> mCategoryNameList) {
+            super(fm);
+            this.mFragList = mFragList;
+            this.mCategoryNameList = mCategoryNameList;
+        }
+
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragList.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mCategoryNameList.get(position);
+        }
     }
 }

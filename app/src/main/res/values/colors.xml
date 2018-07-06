@@ -8,4 +8,8 @@
     <color name="bottom_bar_container_bg">#EBEBEB</color>
     <color name="tab_bottom_item_bg_pressed">#DDDDDD</color>
     <color name="tab_bottom_item_bg_normal">#F3F5F4</color>
+
+    <color name="color_red_f85959">#f85959</color>
+    <color name="color_gray">#808080</color>
+    <color name="color_darkgray">#A9A9A9</color>
 </resources>

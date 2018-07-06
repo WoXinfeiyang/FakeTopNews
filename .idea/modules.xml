@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/FakeTopNews.iml" filepath="$PROJECT_DIR$/FakeTopNews.iml" />
       <module fileurl="file://$PROJECT_DIR$/OkHttpFinal/OkHttpFinal.iml" filepath="$PROJECT_DIR$/OkHttpFinal/OkHttpFinal.iml" />
       <module fileurl="file://E:\AndroidStudioWorkSpace\FakeTopNews\OkHttpFinal\OkHttpFinal.iml" filepath="E:\AndroidStudioWorkSpace\FakeTopNews\OkHttpFinal\OkHttpFinal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PagerSlidingTabStrip/PagerSlidingTabStrip.iml" filepath="$PROJECT_DIR$/PagerSlidingTabStrip/PagerSlidingTabStrip.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

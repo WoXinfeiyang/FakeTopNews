@@ -1,0 +1,27 @@
+-- Merging decision tree log ---
+manifest
+ADDED from E:\AndroidStudioWorkSpace\FakeTopNews\PagerSlidingTabStrip\AndroidManifest.xml:1:1-5:12
+INJECTED from E:\AndroidStudioWorkSpace\FakeTopNews\PagerSlidingTabStrip\AndroidManifest.xml:1:1-5:12
+INJECTED from E:\AndroidStudioWorkSpace\FakeTopNews\PagerSlidingTabStrip\AndroidManifest.xml:1:1-5:12
+	package
+		ADDED from E:\AndroidStudioWorkSpace\FakeTopNews\PagerSlidingTabStrip\AndroidManifest.xml:2:5-47
+		INJECTED from E:\AndroidStudioWorkSpace\FakeTopNews\PagerSlidingTabStrip\AndroidManifest.xml
+		INJECTED from E:\AndroidStudioWorkSpace\FakeTopNews\PagerSlidingTabStrip\AndroidManifest.xml
+	xmlns:android
+		ADDED from E:\AndroidStudioWorkSpace\FakeTopNews\PagerSlidingTabStrip\AndroidManifest.xml:1:11-69
+application
+ADDED from E:\AndroidStudioWorkSpace\FakeTopNews\PagerSlidingTabStrip\AndroidManifest.xml:4:5-20
+uses-sdk
+INJECTED from E:\AndroidStudioWorkSpace\FakeTopNews\PagerSlidingTabStrip\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from E:\AndroidStudioWorkSpace\FakeTopNews\PagerSlidingTabStrip\AndroidManifest.xml
+INJECTED from E:\AndroidStudioWorkSpace\FakeTopNews\PagerSlidingTabStrip\AndroidManifest.xml
+INJECTED from E:\AndroidStudioWorkSpace\FakeTopNews\PagerSlidingTabStrip\AndroidManifest.xml
+INJECTED from E:\AndroidStudioWorkSpace\FakeTopNews\PagerSlidingTabStrip\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from E:\AndroidStudioWorkSpace\FakeTopNews\PagerSlidingTabStrip\AndroidManifest.xml
+		ADDED from E:\AndroidStudioWorkSpace\FakeTopNews\PagerSlidingTabStrip\AndroidManifest.xml
+		INJECTED from E:\AndroidStudioWorkSpace\FakeTopNews\PagerSlidingTabStrip\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from E:\AndroidStudioWorkSpace\FakeTopNews\PagerSlidingTabStrip\AndroidManifest.xml
+		ADDED from E:\AndroidStudioWorkSpace\FakeTopNews\PagerSlidingTabStrip\AndroidManifest.xml
+		INJECTED from E:\AndroidStudioWorkSpace\FakeTopNews\PagerSlidingTabStrip\AndroidManifest.xml
