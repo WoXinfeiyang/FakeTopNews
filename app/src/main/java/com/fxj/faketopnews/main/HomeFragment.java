@@ -20,6 +20,7 @@ import com.fxj.faketopnews.model.HttpConstant;
 import com.fxj.faketopnews.model.bean.CategoryBean;
 import com.fxj.faketopnews.model.bean.NewsListBean;
 import com.fxj.faketopnews.presenter.NewsListPresenter;
+import com.fxj.faketopnews.utils.UiUtils;
 import com.fxj.faketopnews.view_inface.INewsList;
 import com.socks.library.KLog;
 
@@ -124,6 +125,9 @@ public class HomeFragment extends BaseFragment<NewsListPresenter> implements INe
 
         adapter = new HomeAdapter(getChildFragmentManager(),mNewsListFragments,mSelectedCategoryNameList);
         this.mViewPager.setAdapter(adapter);
+
+        this.mTabStrip.setTextSize((int) UiUtils.dp2px(16));
+        this.mTabStrip.setTextColorResource(R.color.color_black_ff222222);
         this.mTabStrip.setViewPager(this.mViewPager);
     }
 

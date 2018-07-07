@@ -12,4 +12,6 @@
     <color name="color_red_f85959">#f85959</color>
     <color name="color_gray">#808080</color>
     <color name="color_darkgray">#A9A9A9</color>
+    <color name="color_e8e8e8">#e8e8e8</color>
+    <color name="color_black_ff222222">#ff222222</color>
 </resources>

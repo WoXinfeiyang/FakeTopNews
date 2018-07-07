@@ -21,10 +21,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:pstsIndicatorColor="@color/color_red_f85959"
-            app:pstsIndicatorHeight="2dp"
+            app:pstsIndicatorColor="@color/red"
+            app:pstsIndicatorHeight="5dp"
 
-            app:pstsUnderlineColor="@color/colorPrimary"
+            app:pstsUnderlineColor="@color/color_e8e8e8"
             app:pstsUnderlineHeight="2dp"
             app:pstsDividerColor="@color/color_darkgray"
             app:pstsDividerPadding="5dp"
