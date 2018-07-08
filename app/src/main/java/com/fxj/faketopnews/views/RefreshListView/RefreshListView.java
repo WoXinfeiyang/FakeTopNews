@@ -1,14 +1,21 @@
 package com.fxj.faketopnews.views.RefreshListView;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
+import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 
 
 public class RefreshListView extends RelativeLayout {
 
+    private final String tag=RefreshListView.class.getSimpleName();
 
+    private SwipeToLoadLayout mSwipeToLoadLayout;
+
+    private RefreshListViewHeader mRefreshListViewHeader;
+    private RecyclerView mRecyclerView;
 
 
     public RefreshListView(Context context) {
