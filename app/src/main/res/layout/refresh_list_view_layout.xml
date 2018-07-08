@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.aspsine.swipetoloadlayout.SwipeToLoadLayout
+        android:id="@+id/swip_to_load_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.fxj.faketopnews.views.RefreshListView.RefreshListViewHeader
+            android:id="@+id/swipe_refresh_header"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            />
+        <android.support.v7.widget.RecyclerView
+            android:id="@id/swipe_target"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>
+</RelativeLayout>

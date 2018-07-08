@@ -33,4 +33,5 @@ dependencies {
 
     compile project(path: ':OkHttpFinal')
     compile project(path:':PagerSlidingTabStrip')
+    compile project(path: ':SwipeToLoadLayout')
 }
