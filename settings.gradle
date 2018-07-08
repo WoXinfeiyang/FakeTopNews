@@ -1,1 +1,1 @@
-include ':app', ':OkHttpFinal', ':PagerSlidingTabStrip'
+include ':app', ':OkHttpFinal', ':PagerSlidingTabStrip', ':SwipeToLoadLayout'
