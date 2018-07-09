@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Created by fuxianjin-hj on 2018/7/6.
  */
 
-public class NewsItemBean implements Parcelable {
+public class NewsDataBean implements Parcelable {
     public String content;
     public String code;
 
@@ -25,29 +25,29 @@ public class NewsItemBean implements Parcelable {
 
     @Override
     public String toString() {
-        return "NewsItemBean{" +
+        return "NewsDataBean{" +
                 "content='" + content + '\'' +
                 ", code='" + code + '\'' +
                 '}';
     }
 
-    public NewsItemBean() {
+    public NewsDataBean() {
     }
 
-    protected NewsItemBean(Parcel in) {
+    protected NewsDataBean(Parcel in) {
         this.content = in.readString();
         this.code = in.readString();
     }
 
-    public static final Parcelable.Creator<NewsItemBean> CREATOR = new Parcelable.Creator<NewsItemBean>() {
+    public static final Parcelable.Creator<NewsDataBean> CREATOR = new Parcelable.Creator<NewsDataBean>() {
         @Override
-        public NewsItemBean createFromParcel(Parcel source) {
-            return new NewsItemBean(source);
+        public NewsDataBean createFromParcel(Parcel source) {
+            return new NewsDataBean(source);
         }
 
         @Override
-        public NewsItemBean[] newArray(int size) {
-            return new NewsItemBean[size];
+        public NewsDataBean[] newArray(int size) {
+            return new NewsDataBean[size];
         }
     };
 

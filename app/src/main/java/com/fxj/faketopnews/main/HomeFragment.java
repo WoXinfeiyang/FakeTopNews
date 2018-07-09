@@ -217,8 +217,8 @@ public class HomeFragment extends BaseFragment<NewsListPresenter> implements INe
 
 
     @Override
-    public void onGetNewsListSuccess(NewsListBean jsonObject) {
-        KLog.i(tag,jsonObject.toString());
+    public void onGetNewsListSuccess(NewsListBean object) {
+        KLog.i(tag,object.toString());
     }
 
     @Override

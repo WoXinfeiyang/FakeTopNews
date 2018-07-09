@@ -11,7 +11,7 @@ public class NewsListBean implements Parcelable {
 
     public String message;
 
-    public List<NewsItemBean> data;
+    public List<NewsDataBean> data;
 
     public int total_number;
 
@@ -74,7 +74,7 @@ public class NewsListBean implements Parcelable {
 
     protected NewsListBean(Parcel in) {
         this.message = in.readString();
-        this.data = in.createTypedArrayList(NewsItemBean.CREATOR);
+        this.data = in.createTypedArrayList(NewsDataBean.CREATOR);
         this.total_number = in.readInt();
         this.has_more = in.readByte() != 0;
         this.login_status = in.readInt();
