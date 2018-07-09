@@ -12,12 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.astuetz.PagerSlidingTabStrip;
 import com.fxj.faketopnews.Base.BaseFragment;
 import com.fxj.faketopnews.R;
 import com.fxj.faketopnews.model.HttpConstant;
 import com.fxj.faketopnews.model.bean.CategoryBean;
+import com.fxj.faketopnews.model.bean.NewsContentBean;
+import com.fxj.faketopnews.model.bean.NewsDataBean;
 import com.fxj.faketopnews.model.bean.NewsListBean;
 import com.fxj.faketopnews.presenter.NewsListPresenter;
 import com.fxj.faketopnews.utils.UiUtils;
@@ -219,6 +222,12 @@ public class HomeFragment extends BaseFragment<NewsListPresenter> implements INe
     @Override
     public void onGetNewsListSuccess(NewsListBean object) {
         KLog.i(tag,object.toString());
+        List<NewsContentBean> mNewsContentList=new ArrayList<NewsContentBean>();
+        for(NewsDataBean dataItem :object.data){
+            NewsContentBean contentItem =JSON.parseObject(dataItem.content,NewsContentBean.class);
+            mNewsContentList.add(contentItem);
+        }
+        KLog.i(tag,"mNewsContentList:"+mNewsContentList);
     }
 
     @Override
