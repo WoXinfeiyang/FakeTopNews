@@ -5,6 +5,8 @@ import android.os.Environment;
 import android.text.TextUtils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class FileUtils {
@@ -145,6 +147,23 @@ public class FileUtils {
         File file = new File(filePath);
         if (file.exists()) {
             file.delete();
+        }
+    }
+
+    /**向指定路径的文件中写数据
+     *@param filePath 文件路径
+     *@param messageData String,要写入的数据
+     * */
+    public static void writeDataToFile(String filePath,String messageData){
+        try {
+            FileOutputStream fileOutputStream=new FileOutputStream(filePath,true);
+            byte[]data=messageData.getBytes();
+            fileOutputStream.write(data);
+            fileOutputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

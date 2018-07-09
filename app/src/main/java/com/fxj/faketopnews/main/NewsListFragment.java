@@ -28,6 +28,8 @@ public class NewsListFragment extends BaseFragment {
     private static String KEY_CATEGORY_CODE="key_category_code";
     private String mCategoryName;
     private String mCategoryCode;
+    /**是否是视频页*/
+    private boolean isVideoList;
 
     public static NewsListFragment newInstance(String mCategoryName,String mCategoryCode) {
         NewsListFragment fragment = new NewsListFragment();
@@ -57,6 +59,10 @@ public class NewsListFragment extends BaseFragment {
 
         this.mCategoryName=getArguments().getString(KEY_CATEGORY_NAME);
         this.mCategoryCode=getArguments().getString(KEY_CATEGORY_CODE);
+
+        if(mCategoryCode.equals("video")){
+            isVideoList = true;
+        }
 
         KLog.i(tag,this.mCategoryName+","+this.mCategoryCode);
 
