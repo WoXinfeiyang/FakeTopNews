@@ -17,6 +17,7 @@ import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.fxj.faketopnews.R;
 import com.socks.library.KLog;
 
+import java.util.List;
 
 public class RefreshListView<H,F> extends RelativeLayout {
 

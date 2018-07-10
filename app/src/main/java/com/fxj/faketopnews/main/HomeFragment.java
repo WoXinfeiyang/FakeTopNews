@@ -17,12 +17,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.astuetz.PagerSlidingTabStrip;
 import com.fxj.faketopnews.Base.BaseFragment;
 import com.fxj.faketopnews.R;
+import com.fxj.faketopnews.main.newsList.NewsListFragment;
 import com.fxj.faketopnews.model.HttpConstant;
 import com.fxj.faketopnews.model.bean.CategoryBean;
 import com.fxj.faketopnews.model.bean.NewsContentBean;
 import com.fxj.faketopnews.model.bean.NewsDataBean;
 import com.fxj.faketopnews.model.bean.NewsListBean;
 import com.fxj.faketopnews.presenter.NewsListPresenter;
+import com.fxj.faketopnews.utils.LogCollectUtils;
 import com.fxj.faketopnews.utils.UiUtils;
 import com.fxj.faketopnews.view_inface.INewsList;
 import com.socks.library.KLog;
@@ -228,6 +230,7 @@ public class HomeFragment extends BaseFragment<NewsListPresenter> implements INe
             mNewsContentList.add(contentItem);
         }
         KLog.i(tag,"mNewsContentList:"+mNewsContentList);
+        LogCollectUtils.getInstance().collectLog(mNewsContentList.toString());
     }
 
     @Override

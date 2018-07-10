@@ -1,20 +1,20 @@
-package com.fxj.faketopnews.main;
+package com.fxj.faketopnews.main.newsList;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fxj.faketopnews.Base.BaseFragment;
-import com.fxj.faketopnews.model.bean.CategoryBean;
+import com.fxj.faketopnews.R;
+import com.fxj.faketopnews.model.bean.NewsContentBean;
+import com.fxj.faketopnews.model.bean.NewsListBean;
+import com.fxj.faketopnews.model.bean.NewsListTipsBean;
 import com.fxj.faketopnews.presenter.BasePresenter;
+import com.fxj.faketopnews.views.RefreshListView.RefreshListView;
 import com.socks.library.KLog;
-
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 /**
  * Created by fuxianjin-hj on 2018/7/6.
@@ -22,7 +22,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 public class NewsListFragment extends BaseFragment {
 
-    private String tag=NewsListFragment.class.getSimpleName();
+    private String tag=NewsListFragment.class.getSimpleName()+"_fxj";
 
     private static String KEY_CATEGORY_NAME="key_category_name";
     private static String KEY_CATEGORY_CODE="key_category_code";
@@ -30,6 +30,11 @@ public class NewsListFragment extends BaseFragment {
     private String mCategoryCode;
     /**是否是视频页*/
     private boolean isVideoList;
+
+    private View rootView;
+    private RefreshListView<NewsListBean,NewsListBean> mRefreshListView;
+
+//    private NewsListDataLoader mDataLoader;
 
     public static NewsListFragment newInstance(String mCategoryName,String mCategoryCode) {
         NewsListFragment fragment = new NewsListFragment();
@@ -62,29 +67,25 @@ public class NewsListFragment extends BaseFragment {
 
         if(mCategoryCode.equals("video")){
             isVideoList = true;
+        }else{
+            isVideoList=false;
         }
 
         KLog.i(tag,this.mCategoryName+","+this.mCategoryCode);
-
-        RelativeLayout rootView=new RelativeLayout(getActivity());
-        RelativeLayout.LayoutParams rlParams=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
-        rootView.setLayoutParams(rlParams);
-
-        TextView tv=new TextView(getActivity());
-        tv.setText(this.mCategoryName);
-        tv.setTextColor(Color.BLACK);
-        tv.setTextSize(COMPLEX_UNIT_DIP,20);
-        rootView.addView(tv);
-        RelativeLayout.LayoutParams tvLayoutParams= (RelativeLayout.LayoutParams) tv.getLayoutParams();
-        tvLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
-        tv.setLayoutParams(tvLayoutParams);
-
+        if(rootView==null){
+            rootView=inflater.inflate(R.layout.fragment_news_list,container,false);
+        }
         return rootView;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((TextView)rootView.findViewById(R.id.tv_news_list_text)).setText(this.mCategoryName);
+        this.mRefreshListView=rootView.findViewById(R.id.refresh_list_view);
+
+//        this.mDataLoader=new NewsListDataLoader(this.mCategoryCode);
+
     }
 
     @Override
