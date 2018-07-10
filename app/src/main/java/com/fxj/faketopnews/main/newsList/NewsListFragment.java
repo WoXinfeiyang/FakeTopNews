@@ -32,7 +32,7 @@ public class NewsListFragment extends BaseFragment {
     private boolean isVideoList;
 
     private View rootView;
-    private RefreshListView<NewsListBean,NewsListBean> mRefreshListView;
+    private RefreshListView<NewsContentBean,NewsContentBean,NewsListTipsBean> mRefreshListView;
 
 //    private NewsListDataLoader mDataLoader;
 

@@ -1,11 +1,13 @@
 package com.fxj.faketopnews.main.newsList;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 
-import com.fxj.faketopnews.model.bean.NewsListBean;
+import com.fxj.faketopnews.model.bean.NewsContentBean;
+import com.fxj.faketopnews.views.RefreshListView.RefreshListAdapter;
 import com.fxj.faketopnews.views.RefreshListView.RefreshListView;
+import com.fxj.faketopnews.views.RefreshListView.RefreshViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +16,13 @@ import java.util.List;
  * Created by fuxianjin-hj on 2018/7/10.
  */
 
-public class NewsListAdapter extends RefreshListView.RefreshListAdapter<NewsListBean,NewsListBean> {
+public class NewsListAdapter extends RefreshListAdapter<NewsContentBean,NewsContentBean> {
+    /**纯文字布局(文章,广告)*/
+    private static int ITEM_VIEW_TYPE_TEXT_NEWS=0;
 
-    private List<NewsListBean> mNewsConteList=new ArrayList<NewsListBean>();
+    private List<NewsContentBean> mNewsConteList=new ArrayList<NewsContentBean>();
+
+
 
     public NewsListAdapter(Context mContext) {
         super(mContext);
@@ -24,32 +30,37 @@ public class NewsListAdapter extends RefreshListView.RefreshListAdapter<NewsList
 
     @Override
     protected int getDataItemCount() {
-        return 0;
+        return mNewsConteList.size();
     }
 
     @Override
     protected int getDataItemViewType(int position) {
-        return 0;
+        return ITEM_VIEW_TYPE_TEXT_NEWS;
     }
 
     @Override
-    protected RefreshListView.RefreshViewHolder onCreateDataViewHolder(ViewGroup parent, int viewType) {
-        return null;
+    protected RefreshViewHolder onCreateDataViewHolder(ViewGroup parent, int viewType) {
+        View itemView=null;
+
+
+        return new RefreshViewHolder(itemView);
     }
 
     @Override
-    protected void onBindDataViewHolder(RefreshListView.RefreshViewHolder holder, int position) {
+    protected void onBindDataViewHolder(RefreshViewHolder holder, int position) {
 
     }
 
     @Override
-    protected void processDataRefresh(NewsListBean headerData) {
-
+    protected void processDataRefresh(List<NewsContentBean> headerData) {
+        mNewsConteList.clear();
+        mNewsConteList.addAll(headerData);
+        notifyDataSetChanged();
     }
 
     @Override
-    protected void processDataAdded(NewsListBean footerData) {
-
+    protected void processDataAdded(List<NewsContentBean> footerData) {
+        this.mNewsConteList.addAll(footerData);
     }
 
 

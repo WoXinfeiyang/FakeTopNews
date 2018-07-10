@@ -4,14 +4,10 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.fxj.faketopnews.R;
@@ -19,7 +15,7 @@ import com.socks.library.KLog;
 
 import java.util.List;
 
-public class RefreshListView<H,F> extends RelativeLayout {
+public class RefreshListView<H,F,T> extends RelativeLayout {
 
     private final String tag=RefreshListView.class.getSimpleName()+"_fxj";
 
@@ -27,23 +23,28 @@ public class RefreshListView<H,F> extends RelativeLayout {
 
     private RefreshListViewHeader mRefreshListViewHeader;
     private RecyclerView mRecyclerView;
-    private IDataLoader<H, F> mDataLoader;
+    private IDataLoader<H,F,T> mDataLoader;
     private RefreshListAdapter<H, F> mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.ItemDecoration mItemDecoration;
 
 
-    private OnDataLoaderCallback<H,F> mOnDataLoaderCallback=new OnDataLoaderCallback<H, F>() {
+    private OnDataLoaderCallback<H,F,T> mOnDataLoaderCallback=new OnDataLoaderCallback<H,F,T>() {
         @Override
-        public void onHeaderDataLoaderCallback(H data, boolean success, boolean hasMore) {
+        public void onHeaderDataLoaderCallback(List<H> data, boolean success, boolean hasMore) {
             /*从网络上获取到数据之后修改UI*/
             mAdapter.onDataRefresh(data,success,hasMore);
             mSwipeToLoadLayout.setRefreshing(false);
         }
 
         @Override
-        public void onFooterDataLoaderCallback(F data) {
+        public void onFooterDataLoaderCallback(List<F> data) {
             mAdapter.onDataAdded(data);
+        }
+
+        @Override
+        public void onTipsDataLoaderCallback(T data) {
+
         }
     };
 
@@ -64,9 +65,11 @@ public class RefreshListView<H,F> extends RelativeLayout {
     }
 
     /**网络请求回调接口,一般供RefreshListView内部使用*/
-    public interface OnDataLoaderCallback<H,F>{
-        public void onHeaderDataLoaderCallback(H data,boolean success,boolean hasMore);
-        public void onFooterDataLoaderCallback(F data);
+    public interface OnDataLoaderCallback<H,F,T>{
+        public void onHeaderDataLoaderCallback(List<H> data,boolean success,boolean hasMore);
+        public void onFooterDataLoaderCallback(List<F> data);
+        /**处理Tips*/
+        public void onTipsDataLoaderCallback(T data);
     }
 
     private void initView(Context ct){
@@ -75,7 +78,7 @@ public class RefreshListView<H,F> extends RelativeLayout {
         this.mRecyclerView=(RecyclerView) findViewById(R.id.swipe_target);
     }
 
-    public void init(IDataLoader<H,F> dataLoader, RefreshListAdapter<H,F> adapter, RecyclerView.LayoutManager layoutManager, final RecyclerView.ItemDecoration itemDecoration){
+    public void init(IDataLoader<H,F,T> dataLoader, RefreshListAdapter<H,F> adapter, RecyclerView.LayoutManager layoutManager, final RecyclerView.ItemDecoration itemDecoration){
         mDataLoader = dataLoader;
         mAdapter = adapter;
         mLayoutManager = layoutManager;
@@ -152,83 +155,6 @@ public class RefreshListView<H,F> extends RelativeLayout {
         }
     }
 
-    public abstract class RefreshListAdapter<H,F> extends RecyclerView.Adapter<RefreshViewHolder>{
 
-        private final String tag=RefreshListAdapter.class.getSimpleName()+"_fxj";
-        protected final int ITEM_VIEW_TYPE_LOADING=Integer.MAX_VALUE;
-
-        protected Context mContext;
-        protected boolean success;
-        protected boolean hasMore;
-
-        public RefreshListAdapter(Context mContext) {
-            this.mContext = mContext;
-        }
-
-        @Override
-        public int getItemViewType(int position) {
-            if(position==getItemCount()-1){
-                return ITEM_VIEW_TYPE_LOADING;
-            }
-            return getDataItemViewType(position);
-        }
-
-        @Override
-        public RefreshViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            if(viewType==ITEM_VIEW_TYPE_LOADING){
-                AdaperLoadingView loadingView=new AdaperLoadingView(this.mContext);
-                return new RefreshViewHolder(loadingView);
-            }else{
-                return onCreateDataViewHolder(parent,viewType);
-            }
-        }
-
-        @Override
-        public void onBindViewHolder(RefreshViewHolder holder, int position) {
-            if(position==getItemCount()-1){
-                AdaperLoadingView loadingView = (AdaperLoadingView) holder.itemView;
-                loadingView.update();
-            }else{
-                onBindDataViewHolder(holder,position);
-            }
-        }
-
-        @Override
-        public int getItemCount() {
-            return getDataItemCount()+1;
-        }
-
-        public void onDataRefresh(H headerData,boolean success,boolean hasMore){
-            this.success=success;
-            this.hasMore=hasMore;
-            if(headerData!=null){
-                processDataRefresh(headerData);
-            }
-        }
-
-        public void onDataAdded(F footerData){
-            if(footerData!=null){
-                processDataAdded(footerData);
-            }
-            notifyItemChanged(getItemCount()-1);
-        }
-
-
-
-        protected abstract int getDataItemCount();
-        protected abstract int getDataItemViewType(int position);
-        protected abstract RefreshViewHolder onCreateDataViewHolder(ViewGroup parent, int viewType);
-        protected abstract void onBindDataViewHolder(RefreshViewHolder holder, int position);
-
-        protected abstract void processDataRefresh(H headerData);
-        protected abstract void processDataAdded(F footerData);
-    }
-
-    public class RefreshViewHolder extends RecyclerView.ViewHolder{
-
-        public RefreshViewHolder(View itemView) {
-            super(itemView);
-        }
-    }
 
 }

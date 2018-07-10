@@ -10,7 +10,7 @@ public class TestActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search_bar_view);
+        setContentView(R.layout.item_view_text_news);
     }
 
 }

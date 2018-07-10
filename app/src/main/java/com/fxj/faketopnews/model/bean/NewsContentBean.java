@@ -124,6 +124,7 @@ public class NewsContentBean implements Parcelable {
     }
 
 
+
     @Override
     public int describeContents() {
         return 0;

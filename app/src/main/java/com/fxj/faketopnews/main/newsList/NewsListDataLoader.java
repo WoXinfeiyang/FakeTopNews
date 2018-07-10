@@ -2,6 +2,7 @@ package com.fxj.faketopnews.main.newsList;
 
 import com.alibaba.fastjson.JSON;
 import com.fxj.faketopnews.model.HttpConstant;
+import com.fxj.faketopnews.model.bean.NewsContentBean;
 import com.fxj.faketopnews.model.bean.NewsListBean;
 import com.fxj.faketopnews.model.bean.NewsDataBean;
 import com.fxj.faketopnews.model.bean.NewsListBean;
@@ -23,7 +24,7 @@ import cn.finalteam.okhttpfinal.RequestParams;
  * Created by fuxianjin-hj on 2018/7/10.
  */
 
-public class NewsListDataLoader implements IDataLoader<NewsListBean,NewsListBean> {
+public class NewsListDataLoader implements IDataLoader<NewsContentBean,NewsContentBean,NewsListTipsBean> {
 
     private final String tag=NewsListDataLoader.class.getSimpleName()+"_fxj";
 
@@ -42,7 +43,7 @@ public class NewsListDataLoader implements IDataLoader<NewsListBean,NewsListBean
     }
 
     @Override
-    public void headerDataLoad(final RefreshListView.OnDataLoaderCallback<NewsListBean,NewsListBean> onDataLoaderCallback) {
+    public void headerDataLoad(final RefreshListView.OnDataLoaderCallback<NewsContentBean,NewsContentBean,NewsListTipsBean> onDataLoaderCallback) {
         this.mLastTime= PreferenceUtils.getLong(KEY_REQUEST_NEWS_LIST_LAST_TIME,0);
         if(mLastTime==0){
             this.mLastTime=System.currentTimeMillis()/1000;
@@ -57,12 +58,20 @@ public class NewsListDataLoader implements IDataLoader<NewsListBean,NewsListBean
 
                 if(onDataLoaderCallback!=null){
                     if(data!=null&&data.message.equals("success")&&data.data.size()>0){
-                        onDataLoaderCallback.onHeaderDataLoaderCallback(data,data.message.equals("success"),data.has_more);
+                        List<NewsContentBean> mNewsConteList=new ArrayList<NewsContentBean>();
+                        for(NewsDataBean itemData:data.data){
+                            NewsContentBean itemContent=JSON.parseObject(itemData.content,NewsContentBean.class);
+                            mNewsConteList.add(itemContent);
+                        }
+                        KLog.i(tag,"NewsListDataLoader#headerDataLoad.onSuccess mNewsConteList="+mNewsConteList);
+                        onDataLoaderCallback.onHeaderDataLoaderCallback(mNewsConteList,data.message.equals("success"),data.has_more);
                     }else{
                         onDataLoaderCallback.onHeaderDataLoaderCallback(null,false,false);
                     }
 
-
+                    if(data!=null&&data.tips!=null){
+                        onDataLoaderCallback.onTipsDataLoaderCallback(data.tips);
+                    }
                 }
             }
 
@@ -70,7 +79,12 @@ public class NewsListDataLoader implements IDataLoader<NewsListBean,NewsListBean
             public void onFailure(int errorCode, String msg) {
                 super.onFailure(errorCode, msg);
                 KLog.i(tag,"NewsListDataLoader#headerDataLoad.onFailure errorCode="+errorCode+",msg="+msg);
-
+                if(onDataLoaderCallback!=null){
+                    NewsListTipsBean tips=new NewsListTipsBean();
+                    tips.display_info=msg;
+                    tips.display_duration=20;
+                    onDataLoaderCallback.onTipsDataLoaderCallback(tips);
+                }
             }
         };
         if(this.mCategoryCode==null){
@@ -81,7 +95,7 @@ public class NewsListDataLoader implements IDataLoader<NewsListBean,NewsListBean
     }
 
     @Override
-    public void footerDataLoad(final RefreshListView.OnDataLoaderCallback<NewsListBean,NewsListBean> onDataLoaderCallback) {
+    public void footerDataLoad(final RefreshListView.OnDataLoaderCallback<NewsContentBean,NewsContentBean,NewsListTipsBean> onDataLoaderCallback) {
         this.mLastTime= PreferenceUtils.getLong(KEY_REQUEST_NEWS_LIST_LAST_TIME,0);
         if(mLastTime==0){
             this.mLastTime=System.currentTimeMillis()/1000;
@@ -96,7 +110,13 @@ public class NewsListDataLoader implements IDataLoader<NewsListBean,NewsListBean
 
                 if(onDataLoaderCallback!=null){
                     if(data!=null&&data.message.equals("success")&&data.data.size()>0){
-                        onDataLoaderCallback.onFooterDataLoaderCallback(data);
+                        List<NewsContentBean> mNewsConteList=new ArrayList<NewsContentBean>();
+                        for(NewsDataBean itemData:data.data){
+                            NewsContentBean itemContent=JSON.parseObject(itemData.content,NewsContentBean.class);
+                            mNewsConteList.add(itemContent);
+                        }
+                        KLog.i(tag,"NewsListDataLoader#footerDataLoad.onSuccess mNewsConteList="+mNewsConteList);
+                        onDataLoaderCallback.onFooterDataLoaderCallback(mNewsConteList);
                     }else{
                         onDataLoaderCallback.onFooterDataLoaderCallback(null);
                     }
@@ -107,6 +127,14 @@ public class NewsListDataLoader implements IDataLoader<NewsListBean,NewsListBean
             public void onFailure(int errorCode, String msg) {
                 super.onFailure(errorCode, msg);
                 KLog.i(tag,"NewsListDataLoader#footerDataLoad.onFailure errorCode="+errorCode+",msg="+msg);
+
+                if(onDataLoaderCallback!=null){
+                    NewsListTipsBean tips=new NewsListTipsBean();
+                    tips.display_info=msg;
+                    tips.display_duration=20;
+                    onDataLoaderCallback.onTipsDataLoaderCallback(tips);
+                }
+
             }
         };
         if(this.mCategoryCode==null){
