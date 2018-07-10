@@ -11,7 +11,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fxj.faketopnews.Base.BaseFragment;
+import com.fxj.faketopnews.R;
 import com.fxj.faketopnews.presenter.BasePresenter;
+import com.fxj.faketopnews.utils.LogCollectUtils;
 import com.socks.library.KLog;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
@@ -66,12 +68,18 @@ public class MicroFragment extends BaseFragment {
         TextView tv=new TextView(mContext);
         tv.setText("微头条");
         tv.setTextColor(Color.BLACK);
-        tv.setTextSize(COMPLEX_UNIT_DIP,20);
+        tv.setTextSize(COMPLEX_UNIT_DIP,50);
+        tv.setBackgroundResource(R.color.color_red_f85959);
         rootView.addView(tv);
         RelativeLayout.LayoutParams tvLayoutParams= (RelativeLayout.LayoutParams) tv.getLayoutParams();
         tvLayoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
         tv.setLayoutParams(tvLayoutParams);
-
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LogCollectUtils.getInstance().collectLog("微头条被点击了!");
+            }
+        });
         return rootView;
     }
 

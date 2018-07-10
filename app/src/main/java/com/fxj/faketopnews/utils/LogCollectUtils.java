@@ -16,14 +16,14 @@ import java.util.Date;
 
 public class LogCollectUtils {
 
-    private final static String TAG=LogCollectUtils.class.getSimpleName();
+    private final String TAG=LogCollectUtils.class.getSimpleName()+"_fxj";
 
     private static volatile LogCollectUtils sInstance;
 
-    protected static String appDirPath;
+    protected String appDirPath;
 
-    private static HandlerThread mHandlerThread;
-    private static Handler mHandler;
+    private HandlerThread mHandlerThread;
+    private Handler mHandler;
 
     private final static String DEFAULT_LOG_FOLDER_NAME="LogFolder";
 
@@ -32,9 +32,10 @@ public class LogCollectUtils {
     private SimpleDateFormat mTimeDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     private void LogCollectUtils() {
-        if(appDirPath==null){
-           appDirPath=FileUtils.getAppDir(BaseApplication.getAppContext(),"FakeTopNews");
-        }
+        initHandlerThread();
+    }
+    /*初始化HandlerThread和Handler,将对文件的读写操作放在子线程中*/
+    public void initHandlerThread(){
         if(mHandlerThread==null){
             mHandlerThread=new HandlerThread("LogCollect");
         }
@@ -43,12 +44,14 @@ public class LogCollectUtils {
         if(mHandler==null){
             mHandler=new Handler(mHandlerThread.getLooper()){
                 @Override
-                public void handleMessage(Message msg) {
+                public void handleMessage(Message msg)
+                {
                     if(msg!=null){
                         Bundle bundle=msg.getData();
                         String log=bundle.getString("log");
                         String filePath=bundle.getString("filePath");
-                        FileUtils.writeDataToFile(filePath,getTimeDateString()+":"+log+"\n");
+                        KLog.i(TAG,"Message:"+msg+",log:"+log+",filePath:"+filePath);
+                        FileUtils.writeDataToFile(filePath,"["+getTimeDateString()+"]:"+log+"\n");
                     }
                 }
             };
@@ -67,6 +70,9 @@ public class LogCollectUtils {
     }
 
     public String getAppDirPath(){
+        if(appDirPath==null){
+            appDirPath=FileUtils.getAppDir(BaseApplication.getAppContext(),"FakeTopNews");
+        }
         KLog.i(TAG,"appDirPath="+appDirPath);
         return appDirPath;
     }
@@ -82,14 +88,17 @@ public class LogCollectUtils {
     }
 
     public void collectLog(String log){
-        if(!TextUtils.isEmpty(log)){
+        if(TextUtils.isEmpty(log)){
             return;
         }
         Message msg=Message.obtain();
         Bundle bundle=new Bundle();
         bundle.putString("log",log);
-        bundle.putString("filePath",getLogFolderPath()+getDayDateString());
+        bundle.putString("filePath",getLogFolderPath()+getDayDateString()+".txt");
         msg.setData(bundle);
+        if(mHandler==null||mHandlerThread==null){/*每次使用Handler发送消息之前对Handder进行判空检查*/
+            initHandlerThread();
+        }
         mHandler.sendMessage(msg);
     }
 
