@@ -18,7 +18,7 @@ import java.util.List;
 
 public class NewsListAdapter extends RefreshListAdapter<NewsContentBean,NewsContentBean> {
     /**纯文字布局(文章,广告)*/
-    private static int ITEM_VIEW_TYPE_TEXT_NEWS=0;
+    private static final int ITEM_VIEW_TYPE_TEXT_NEWS=0;
 
     private List<NewsContentBean> mNewsConteList=new ArrayList<NewsContentBean>();
 
@@ -41,14 +41,24 @@ public class NewsListAdapter extends RefreshListAdapter<NewsContentBean,NewsCont
     @Override
     protected RefreshViewHolder onCreateDataViewHolder(ViewGroup parent, int viewType) {
         View itemView=null;
-
-
+        switch (viewType){
+            case ITEM_VIEW_TYPE_TEXT_NEWS:
+                ItemTextNewsView mItemTextNewsView=new ItemTextNewsView(this.mContext);
+                itemView=mItemTextNewsView;
+                break;
+        }
         return new RefreshViewHolder(itemView);
     }
 
     @Override
     protected void onBindDataViewHolder(RefreshViewHolder holder, int position) {
-
+        int viewType=getItemViewType(position);
+        NewsContentBean itemNewsContent=this.mNewsConteList.get(position);
+        switch (viewType){
+            case ITEM_VIEW_TYPE_TEXT_NEWS:
+                ((ItemTextNewsView)holder.itemView).updateView(itemNewsContent);
+                break;
+        }
     }
 
     @Override
