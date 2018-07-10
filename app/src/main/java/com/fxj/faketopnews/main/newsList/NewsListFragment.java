@@ -2,6 +2,7 @@ package com.fxj.faketopnews.main.newsList;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +34,8 @@ public class NewsListFragment extends BaseFragment {
 
     private View rootView;
     private RefreshListView<NewsContentBean,NewsContentBean,NewsListTipsBean> mRefreshListView;
-
-//    private NewsListDataLoader mDataLoader;
+    private NewsListDataLoader mDataLoader;
+    private NewsListAdapter adapter;
 
     public static NewsListFragment newInstance(String mCategoryName,String mCategoryCode) {
         NewsListFragment fragment = new NewsListFragment();
@@ -84,8 +85,10 @@ public class NewsListFragment extends BaseFragment {
         ((TextView)rootView.findViewById(R.id.tv_news_list_text)).setText(this.mCategoryName);
         this.mRefreshListView=rootView.findViewById(R.id.refresh_list_view);
 
-//        this.mDataLoader=new NewsListDataLoader(this.mCategoryCode);
-
+        this.mDataLoader=new NewsListDataLoader(this.mCategoryCode);
+        this.adapter=new NewsListAdapter(getActivity());
+        LinearLayoutManager manager=new LinearLayoutManager(getActivity());
+        this.mRefreshListView.init(this.mDataLoader,this.adapter,manager,null);
     }
 
     @Override
