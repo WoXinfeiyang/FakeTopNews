@@ -89,6 +89,7 @@ public class NewsListFragment extends BaseFragment {
         this.adapter=new NewsListAdapter(getActivity());
         LinearLayoutManager manager=new LinearLayoutManager(getActivity());
         this.mRefreshListView.init(this.mDataLoader,this.adapter,manager,null);
+        this.mRefreshListView.headRefresh(false);
     }
 
     @Override
