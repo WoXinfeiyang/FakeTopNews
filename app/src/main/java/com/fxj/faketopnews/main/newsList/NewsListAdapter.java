@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 
 import com.fxj.faketopnews.model.bean.NewsContentBean;
 import com.fxj.faketopnews.views.RefreshListView.RefreshListAdapter;
-import com.fxj.faketopnews.views.RefreshListView.RefreshListView;
 import com.fxj.faketopnews.views.RefreshListView.RefreshViewHolder;
 
 import java.util.ArrayList;

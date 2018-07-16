@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.fxj.faketopnews.BuildConfig;
+import com.fxj.faketopnews.utils.LogCollectUtils;
 import com.socks.library.KLog;
 
 import java.util.ArrayList;
@@ -22,11 +23,13 @@ public class BaseApplication extends Application {
 
     @Override
     public void onCreate() {
+        long startTime=System.currentTimeMillis();
         super.onCreate();
         KLog.init(BuildConfig.DEBUG);
         appContext=getApplicationContext();
         KLog.i(tag,"**BaseApplication.onCreate**appContext="+appContext);
         initOkHttpFinal();
+        LogCollectUtils.getInstance().collectLog("BaseApplication.onCreate cost time="+(System.currentTimeMillis()-startTime)+"ms");
     }
 
     public static Context getAppContext(){
