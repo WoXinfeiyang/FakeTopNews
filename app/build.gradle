@@ -30,7 +30,19 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxandroid:2.0.2'
     compile 'org.greenrobot:eventbus:3.1.1'
     compile 'com.android.support:support-v4:26.0.1'
+
+    /*Fresco依赖*/
+    compile 'com.facebook.fresco:fresco:1.9.0'
+    /*支持Gif动画*/
+    compile 'com.facebook.fresco:animated-gif:1.9.0'
+    /*支持WebP(静态图+动图)*/
+    compile 'com.facebook.fresco:animated-webp:1.9.0'
+    compile 'com.facebook.fresco:webpsupport:1.9.0'
+    /*ImagePipeline 使用OkHttp3*/
+    compile "com.facebook.fresco:imagepipeline-okhttp3:0.12.0+"
+
     compile project(path: ':OkHttpFinal')
     compile project(path: ':PagerSlidingTabStrip')
     compile project(path: ':SwipeToLoadLayout')
+
 }

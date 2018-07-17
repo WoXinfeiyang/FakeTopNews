@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.fxj.faketopnews.BuildConfig;
+import com.fxj.faketopnews.utils.FrescoUtils;
 import com.fxj.faketopnews.utils.LogCollectUtils;
 import com.socks.library.KLog;
 
@@ -29,6 +30,7 @@ public class BaseApplication extends Application {
         appContext=getApplicationContext();
         KLog.i(tag,"**BaseApplication.onCreate**appContext="+appContext);
         initOkHttpFinal();
+        FrescoUtils.getsInstance().initialize(this);
         LogCollectUtils.getInstance().collectLog("BaseApplication.onCreate cost time="+(System.currentTimeMillis()-startTime)+"ms");
     }
 

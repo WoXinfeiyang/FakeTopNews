@@ -71,7 +71,7 @@ public class LogCollectUtils {
 
     public String getAppDirPath(){
         if(appDirPath==null){
-            appDirPath=FileUtils.getAppDir(BaseApplication.getAppContext(),"FakeTopNews");
+            appDirPath=FileUtils.getAppDir();
         }
         KLog.i(TAG,"appDirPath="+appDirPath);
         return appDirPath;

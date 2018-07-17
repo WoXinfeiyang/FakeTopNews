@@ -4,12 +4,16 @@ import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils;
 
+import com.fxj.faketopnews.Base.BaseApplication;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class FileUtils {
+
+    private static String DEFAULT_APP_DIR_NAME="FakeTopNews";
 
     /**检查SD卡是否存在*/
     public static boolean checkSDCard(){
@@ -127,6 +131,29 @@ public class FileUtils {
         makeDir(AppDir);
         return AppDir;
     }
+
+
+    public static String getAppDir(){
+        return getAppDir(BaseApplication.getAppContext(),DEFAULT_APP_DIR_NAME);
+    }
+
+    private static String DEFAULT_CACHE_DIR_NAME="cache";
+    /**获取缓存文件夹*/
+    public static String getCacheDir(){
+        String cacheDir=getAppDir()+DEFAULT_CACHE_DIR_NAME+File.separator;
+        makeDir(cacheDir);
+        return cacheDir;
+    }
+
+    private static String DEFAULT_SMALL_CACHE_DIR_NAME="small_cache";
+    /**获取小图缓存文件夹*/
+    public static String getSmallCacheDir(){
+        String cacheDir=getAppDir()+DEFAULT_SMALL_CACHE_DIR_NAME+File.separator;
+        makeDir(cacheDir);
+        return cacheDir;
+    }
+
+
 
     /**
      * 给指定文件夹创建.nomedia文件
