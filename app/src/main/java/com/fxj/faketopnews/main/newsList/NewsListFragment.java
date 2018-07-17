@@ -88,7 +88,8 @@ public class NewsListFragment extends BaseFragment {
         this.mDataLoader=new NewsListDataLoader(this.mCategoryCode);
         this.adapter=new NewsListAdapter(getActivity());
         LinearLayoutManager manager=new LinearLayoutManager(getActivity());
-        this.mRefreshListView.init(this.mDataLoader,this.adapter,manager,null);
+        LinearDividerDecoration decoration=new LinearDividerDecoration(getActivity(),0.5f,R.color.color_grey_dddddd);
+        this.mRefreshListView.init(this.mDataLoader,this.adapter,manager,decoration);
         this.mRefreshListView.headRefresh(false);
     }
 
