@@ -19,4 +19,6 @@
     <color name="color_grey_dddddd">#DDDDDD</color>
 
     <color name="color_red_F96B6B">#F96B6B</color>
+
+    <color name="color_translucent">#aa000000</color>
 </resources>

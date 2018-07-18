@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fxj.faketopnews.model.bean.NewsContentBean;
+import com.fxj.faketopnews.utils.ListUtils;
 import com.fxj.faketopnews.views.RefreshListView.RefreshListAdapter;
 import com.fxj.faketopnews.views.RefreshListView.RefreshViewHolder;
 
@@ -48,6 +49,10 @@ public class NewsListAdapter extends RefreshListAdapter<NewsContentBean,NewsCont
                 if(newContentItem.gallary_image_count==3){
                     return ITEM_VIEW_TYPE_THREE_PICS_NEWS;
                 }
+
+                if(!ListUtils.isEmpty(newContentItem.image_list)&&newContentItem.gallary_image_count!=3){
+                    return ITEM_VIEW_TYPE_CENTER_SINGLE_PIC_NEWS;
+                }
             }
         }
         return ITEM_VIEW_TYPE_TEXT_NEWS;
@@ -65,6 +70,10 @@ public class NewsListAdapter extends RefreshListAdapter<NewsContentBean,NewsCont
                 ItemThreePicNewsView mItemThreePicNewsView=new ItemThreePicNewsView(this.mContext);
                 itemView=mItemThreePicNewsView;
                 break;
+            case ITEM_VIEW_TYPE_CENTER_SINGLE_PIC_NEWS:
+                ItemCenterSinglePicNewsView mItemCenterSinglePicNewsView=new ItemCenterSinglePicNewsView(this.mContext);
+                itemView=mItemCenterSinglePicNewsView;
+                break;
         }
         return new RefreshViewHolder(itemView);
     }
@@ -79,6 +88,9 @@ public class NewsListAdapter extends RefreshListAdapter<NewsContentBean,NewsCont
                 break;
             case ITEM_VIEW_TYPE_THREE_PICS_NEWS:
                 ((ItemThreePicNewsView)holder.itemView).updateView(itemNewsContent);
+                break;
+            case ITEM_VIEW_TYPE_CENTER_SINGLE_PIC_NEWS:
+                ((ItemCenterSinglePicNewsView)holder.itemView).updateView(itemNewsContent);
                 break;
         }
     }

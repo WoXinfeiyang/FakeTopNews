@@ -22,7 +22,8 @@
             android:layout_weight="1"
             android:visibility="visible"
             fresco:placeholderImage="@drawable/ic_default"
-            fresco:actualImageScaleType="fitCenter"
+            fresco:placeholderImageScaleType="centerCrop"
+            fresco:actualImageScaleType="centerCrop"
             />
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/drawee_view_pic02"
@@ -33,7 +34,8 @@
             android:layout_marginRight="2dp"
             android:visibility="visible"
             fresco:placeholderImage="@drawable/ic_default"
-            fresco:actualImageScaleType="fitCenter"
+            fresco:placeholderImageScaleType="centerCrop"
+            fresco:actualImageScaleType="centerCrop"
             />
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/drawee_view_pic03"
@@ -42,7 +44,8 @@
             android:layout_weight="1"
             android:visibility="visible"
             fresco:placeholderImage="@drawable/ic_default"
-            fresco:actualImageScaleType="fitCenter"
+            fresco:placeholderImageScaleType="centerCrop"
+            fresco:actualImageScaleType="centerCrop"
             />
     </LinearLayout>
 
