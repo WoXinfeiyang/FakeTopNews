@@ -2,6 +2,7 @@ package com.fxj.faketopnews.main.newsList;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.fxj.faketopnews.R;
 import com.fxj.faketopnews.model.bean.NewsContentBean;
 import com.fxj.faketopnews.utils.TimeUtils;
+import com.socks.library.KLog;
 
 /**
  * Created by fuxianjin-hj on 2018/7/10.
@@ -55,9 +57,9 @@ public class ItemTextNewsView extends LinearLayout {
     }
 
     public void updateView(NewsContentBean newsContent){
-        this.tvNewsTitle.setText(newsContent.title);
+        this.tvNewsTitle.setText(TextUtils.isEmpty(newsContent.title)?"":newsContent.title);
         this.tvTag.setText("");
-        this.tvNewsAuthor.setText(newsContent.source);
+        this.tvNewsAuthor.setText(TextUtils.isEmpty(newsContent.source)?"":newsContent.source);
         this.tvCommentNum.setText(newsContent.comment_count+"评论");
         this.tvNewsPublishTime.setText(TimeUtils.getShortTime(newsContent.behot_time*1000));
     }
