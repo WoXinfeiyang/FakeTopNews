@@ -82,7 +82,8 @@ public class NewsListFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((TextView)rootView.findViewById(R.id.tv_news_list_text)).setText(this.mCategoryName);
+//        ((TextView)rootView.findViewById(R.id.tv_news_list_text)).setText(this.mCategoryName);
+        ((TextView)rootView.findViewById(R.id.tv_news_list_text)).setVisibility(View.GONE);
         this.mRefreshListView=rootView.findViewById(R.id.refresh_list_view);
 
         this.mDataLoader=new NewsListDataLoader(this.mCategoryCode);
