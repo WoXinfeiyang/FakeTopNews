@@ -18,9 +18,7 @@ import com.socks.library.KLog;
  */
 
 public class ItemTextNewsView extends LinearLayout {
-
-    private final String log_tag=ItemTextNewsView.class.getSimpleName()+"_fxj";
-
+    
     /**新闻标题*/
     private TextView tvNewsTitle;
     /**新闻标签(置顶、热、广告、影视)*/
