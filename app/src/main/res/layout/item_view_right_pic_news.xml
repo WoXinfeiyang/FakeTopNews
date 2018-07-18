@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@drawable/news_list_item_bg">
+
+    <RelativeLayout
+        android:id="@+id/rl_right_part"
+        android:layout_width="130dp"
+        android:layout_height="80dp"
+        android:layout_alignParentRight="true">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/drawee_view_right_pic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            fresco:placeholderImage="@drawable/ic_default"
+            fresco:placeholderImageScaleType="centerCrop"
+            fresco:actualImageScaleType="centerCrop"
+            />
+        
+        <LinearLayout
+            android:id="@+id/ll_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:minWidth="40dp"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:background="@drawable/rectangle_translucent_bg"
+            android:visibility="visible">
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                fresco:actualImageResource="@drawable/icon_video_play"
+                />
+            <TextView
+                android:id="@+id/tv_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:gravity="center"
+                android:text="02:11"
+                android:textColor="@color/red"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/include_news_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/rl_right_part"
+        android:layout_alignTop="@id/rl_right_part"
+        android:layout_marginTop="6dp"
+        android:layout_marginRight="3dp"/>
+
+    <include layout="@layout/include_news_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/rl_right_part"
+        android:layout_alignBottom="@id/rl_right_part"
+        android:layout_marginBottom="6dp"
+        android:layout_marginRight="3dp"/>
+</RelativeLayout>

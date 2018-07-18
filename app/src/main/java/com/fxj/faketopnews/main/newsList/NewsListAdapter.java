@@ -22,7 +22,7 @@ public class NewsListAdapter extends RefreshListAdapter<NewsContentBean,NewsCont
     /**居中大图布局(1.单图文章；2.单图广告；3.视频，中间显示播放图标，右侧显示时长)*/
     private static final int ITEM_VIEW_TYPE_CENTER_SINGLE_PIC_NEWS=1;
     /**右侧小图布局(1.小图新闻；2.视频类型，右下角显示视频时长)*/
-    private static final int ITEM_VIEW_TYPE_RIGHT_PIC_VIDEO_NEWS=2;
+    private static final int ITEM_VIEW_TYPE_RIGHT_PIC_NEWS_NEWS =2;
     /**三张图片布局(文章、广告)*/
     private static final int ITEM_VIEW_TYPE_THREE_PICS_NEWS=3;
 
@@ -46,13 +46,15 @@ public class NewsListAdapter extends RefreshListAdapter<NewsContentBean,NewsCont
             if(!newContentItem.has_image){/*纯文字新闻*/
                 return ITEM_VIEW_TYPE_TEXT_NEWS;
             }else{/**图片新闻*/
+                if(ListUtils.isEmpty(newContentItem.image_list)){/*图片列表为空，则是右侧图片*/
+                    return ITEM_VIEW_TYPE_RIGHT_PIC_NEWS_NEWS;
+                }
+
                 if(newContentItem.gallary_image_count==3){
                     return ITEM_VIEW_TYPE_THREE_PICS_NEWS;
                 }
 
-                if(!ListUtils.isEmpty(newContentItem.image_list)&&newContentItem.gallary_image_count!=3){
-                    return ITEM_VIEW_TYPE_CENTER_SINGLE_PIC_NEWS;
-                }
+                return ITEM_VIEW_TYPE_CENTER_SINGLE_PIC_NEWS;
             }
         }
         return ITEM_VIEW_TYPE_TEXT_NEWS;
@@ -74,6 +76,10 @@ public class NewsListAdapter extends RefreshListAdapter<NewsContentBean,NewsCont
                 ItemCenterSinglePicNewsView mItemCenterSinglePicNewsView=new ItemCenterSinglePicNewsView(this.mContext);
                 itemView=mItemCenterSinglePicNewsView;
                 break;
+            case ITEM_VIEW_TYPE_RIGHT_PIC_NEWS_NEWS:
+                ItemRightPicNewsView mItemRightPicNewsView=new ItemRightPicNewsView(this.mContext);
+                itemView=mItemRightPicNewsView;
+                break;
         }
         return new RefreshViewHolder(itemView);
     }
@@ -91,6 +97,9 @@ public class NewsListAdapter extends RefreshListAdapter<NewsContentBean,NewsCont
                 break;
             case ITEM_VIEW_TYPE_CENTER_SINGLE_PIC_NEWS:
                 ((ItemCenterSinglePicNewsView)holder.itemView).updateView(itemNewsContent);
+                break;
+            case ITEM_VIEW_TYPE_RIGHT_PIC_NEWS_NEWS:
+                ((ItemRightPicNewsView)holder.itemView).updateView(itemNewsContent);
                 break;
         }
     }

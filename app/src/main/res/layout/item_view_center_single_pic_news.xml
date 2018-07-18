@@ -37,7 +37,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_margin="5dp"
                 android:gravity="center"
-                android:background="@drawable/center_single_pic_news_bottom_right_bg"
+                android:background="@drawable/rectangle_translucent_bg"
                 android:drawablePadding="2dp"
                 android:text="02:11"
                 android:textColor="@color/white"
