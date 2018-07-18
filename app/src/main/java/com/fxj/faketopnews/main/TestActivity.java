@@ -19,7 +19,7 @@ public class TestActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.item_view_text_news);
+        setContentView(R.layout.activity_test);
 
         SimpleDraweeView testDraweeView=findViewById(R.id.drawee_view_test);
         Uri uri=Uri.parse("http://n.sinaimg.cn/fashion/transform/116/w550h366/20180604/KTbk-hcmurvh3788668.jpg");
