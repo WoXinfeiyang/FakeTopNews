@@ -32,6 +32,9 @@ public class RefreshListView<H,F,T> extends RelativeLayout {
     private OnDataLoaderCallback<H,F,T> mOnDataLoaderCallback=new OnDataLoaderCallback<H,F,T>() {
         @Override
         public void onHeaderDataLoaderCallback(List<H> data, boolean success, boolean hasMore) {
+            if(data==null||!success){
+                mSwipeToLoadLayout.setRefreshing(false);
+            }
             /*从网络上获取到数据之后修改UI*/
             mAdapter.onDataRefresh(data,success,hasMore);
             mSwipeToLoadLayout.setRefreshing(false);

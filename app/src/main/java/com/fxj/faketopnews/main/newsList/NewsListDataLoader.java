@@ -80,6 +80,7 @@ public class NewsListDataLoader implements IDataLoader<NewsContentBean,NewsConte
                 super.onFailure(errorCode, msg);
                 KLog.i(tag,"NewsListDataLoader#headerDataLoad.onFailure errorCode="+errorCode+",msg="+msg);
                 if(onDataLoaderCallback!=null){
+                    onDataLoaderCallback.onHeaderDataLoaderCallback(null,false,false);
                     NewsListTipsBean tips=new NewsListTipsBean();
                     tips.display_info=msg;
                     tips.display_duration=20;
