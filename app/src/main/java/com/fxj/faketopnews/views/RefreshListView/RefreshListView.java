@@ -158,6 +158,11 @@ public class RefreshListView<H,F,T> extends RelativeLayout {
         }
     }
 
-
+    public RecyclerView getRecyclerView(){
+        if(this.mRecyclerView==null){
+            throw new NullPointerException("RefreshListView中RecyclerView为空!");
+        }
+        return this.mRecyclerView;
+    }
 
 }
