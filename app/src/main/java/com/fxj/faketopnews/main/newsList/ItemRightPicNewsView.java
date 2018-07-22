@@ -71,7 +71,7 @@ public class ItemRightPicNewsView extends RelativeLayout {
         this.tvNewsPublishTime.setText(TimeUtils.getShortTime(newsContent.behot_time*1000));
         if(newsContent.has_video){
             durationGroup.setVisibility(View.VISIBLE);
-            tvDuration.setText("");
+            tvDuration.setText(TimeUtils.secondToTime(newsContent.video_duration));
         }else{
             if(durationGroup!=null){
                 durationGroup.setVisibility(View.INVISIBLE);

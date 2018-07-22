@@ -76,7 +76,7 @@ public class ItemCenterSinglePicNewsView extends LinearLayout {
             playBtn.setVisibility(VISIBLE);
             tvBottomRight.setVisibility(View.VISIBLE);
             tvBottomRight.setCompoundDrawables(null,null,null,null);
-            tvBottomRight.setText("");
+            tvBottomRight.setText(TimeUtils.secondToTime(newsContent.video_duration));
 
             FrescoUtils.getsInstance().displayImage(this.centerPic,newsContent.video_detail_info.detail_video_large_image.url);
         }else{

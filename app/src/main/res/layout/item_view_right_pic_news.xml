@@ -48,7 +48,7 @@
                 android:layout_marginLeft="2dp"
                 android:gravity="center"
                 android:text="02:11"
-                android:textColor="@color/red"
+                android:textColor="@color/white"
                 android:textSize="10sp" />
         </LinearLayout>
     </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.fxj.faketopnews.main.newsList;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -39,18 +40,25 @@ public class NewsListAdapter extends RefreshListAdapter<NewsContentBean,NewsCont
 
     @Override
     protected int getDataItemViewType(int position) {
-        NewsContentBean newContentItem=mNewsConteList.get(position);
-        if(newContentItem.has_video){/*视频新闻*/
-
+        NewsContentBean newsContentItem=mNewsConteList.get(position);
+        if(newsContentItem.has_video){/*视频新闻*/
+            if(newsContentItem.video_style==0){
+                if(newsContentItem.middle_image==null|| TextUtils.isEmpty(newsContentItem.middle_image.url)){
+                    return ITEM_VIEW_TYPE_TEXT_NEWS;
+                }
+                return ITEM_VIEW_TYPE_RIGHT_PIC_NEWS_NEWS;
+            }else if(newsContentItem.video_style==2){
+                return ITEM_VIEW_TYPE_CENTER_SINGLE_PIC_NEWS;
+            }
         }else{/*非视频新闻*/
-            if(!newContentItem.has_image){/*纯文字新闻*/
+            if(!newsContentItem.has_image){/*纯文字新闻*/
                 return ITEM_VIEW_TYPE_TEXT_NEWS;
             }else{/**图片新闻*/
-                if(ListUtils.isEmpty(newContentItem.image_list)){/*图片列表为空，则是右侧图片*/
+                if(ListUtils.isEmpty(newsContentItem.image_list)){/*图片列表为空，则是右侧图片*/
                     return ITEM_VIEW_TYPE_RIGHT_PIC_NEWS_NEWS;
                 }
 
-                if(newContentItem.gallary_image_count==3){
+                if(newsContentItem.gallary_image_count==3){
                     return ITEM_VIEW_TYPE_THREE_PICS_NEWS;
                 }
 

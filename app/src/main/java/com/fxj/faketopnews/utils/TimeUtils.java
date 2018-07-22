@@ -30,4 +30,42 @@ public class TimeUtils {
         }
         return resultStr;
     }
+
+    /**
+     * 将秒数转换成00:00的字符串，如 118秒 -> 01:58
+     * @param secondTime
+     * @return
+     */
+    public static String secondToTime(int secondTime){
+        String timeStr=null;
+        int hour=0;
+        int minute=0;
+        int second=0;
+        if(secondTime<=0){
+            return "00:00";
+        }
+        minute=secondTime/60;
+        if(minute<60){/*当秒数时长小于一个小时*/
+            second=secondTime%60;
+            timeStr=unitFormat(minute)+":"+unitFormat(second);
+        }else{
+            hour=minute/60;
+            minute=minute%60;
+            second=hour*3600-minute*60;
+            timeStr=unitFormat(hour)+":"+unitFormat(minute)+":"+unitFormat(second);
+        }
+        return timeStr;
+    }
+
+    private static String unitFormat(int time){
+        String resultStr=null;
+        if(time<=0){
+            resultStr="00";
+        }else if(time>0&&time<10){
+            resultStr="0"+String.valueOf(time);
+        }else{
+            resultStr=String.valueOf(time);
+        }
+        return resultStr;
+    }
 }
