@@ -86,7 +86,7 @@ public class NewsListFragment extends BaseFragment {
         ((TextView)rootView.findViewById(R.id.tv_news_list_text)).setVisibility(View.GONE);
         this.mRefreshListView=rootView.findViewById(R.id.refresh_list_view);
 
-//        this.mRefreshListView.getmRefreshListViewHeader().setBackgroundColor(getActivity().getResources().getColor(R.color.color_darkgray));
+        this.mRefreshListView.getmRefreshListViewHeader().setBackground(getContext().getResources().getDrawable(R.drawable.refresh_header_bg));
 
         this.mDataLoader=new NewsListDataLoader(this.mCategoryCode);
         this.adapter=new NewsListAdapter(getActivity());
