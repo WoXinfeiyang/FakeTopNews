@@ -129,12 +129,14 @@ public class RefreshListViewHeader extends LinearLayout implements SwipeRefreshT
                 this.mRefreshArrow.clearAnimation();
                 this.mRefreshArrow.setVisibility(INVISIBLE);
                 this.mRefreshLoading.setVisibility(View.VISIBLE);
+                this.mRefreshLoadingDrawable.start();
                 this.mTvRefreshTipsContent.setText(this.mRefreshingTips);
                 break;
             case REFRESH_FINISHED:
                 this.mRefreshArrow.setVisibility(VISIBLE);
                 this.mRefreshArrow.startAnimation(this.mUpAnimation);
                 this.mRefreshLoading.setVisibility(INVISIBLE);
+                this.mRefreshLoadingDrawable.stop();
                 this.mTvRefreshTipsContent.setText(this.mRefreshFinishedTips);
                 break;
         }
