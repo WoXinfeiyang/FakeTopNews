@@ -23,6 +23,7 @@ public class RefreshListView<H,F,T> extends RelativeLayout {
 
     private RefreshListViewHeader mRefreshListViewHeader;
     private RecyclerView mRecyclerView;
+    private RefreshListViewHeader mHeaderView;
     private IDataLoader<H,F,T> mDataLoader;
     private RefreshListAdapter<H, F> mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -52,6 +53,7 @@ public class RefreshListView<H,F,T> extends RelativeLayout {
     };
 
 
+
     public RefreshListView(Context context) {
         super(context);
         initView(context);
@@ -79,6 +81,7 @@ public class RefreshListView<H,F,T> extends RelativeLayout {
         LayoutInflater.from(ct).inflate(R.layout.refresh_list_view_layout,this,true);
         this.mSwipeToLoadLayout=(SwipeToLoadLayout) findViewById(R.id.swip_to_load_layout);
         this.mRecyclerView=(RecyclerView) findViewById(R.id.swipe_target);
+        mHeaderView = (RefreshListViewHeader)findViewById(R.id.swipe_refresh_header);
     }
 
     public void init(IDataLoader<H,F,T> dataLoader, RefreshListAdapter<H,F> adapter, RecyclerView.LayoutManager layoutManager, final RecyclerView.ItemDecoration itemDecoration){
@@ -165,4 +168,10 @@ public class RefreshListView<H,F,T> extends RelativeLayout {
         return this.mRecyclerView;
     }
 
+    public RefreshListViewHeader getmRefreshListViewHeader(){
+        if(this.mHeaderView==null){
+            throw new NullPointerException("RefreshListView中RefreshListViewHeader为空!");
+        }
+        return this.mHeaderView;
+    }
 }
